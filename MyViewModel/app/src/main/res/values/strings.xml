@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">MyViewModel</string>
+    <string name="length">Length</string>
+    <string name="width">Width</string>
+    <string name="height">Height</string>
+    <string name="calculate">Calculate</string>
+    <string name="result">Result</string>
+</resources>
