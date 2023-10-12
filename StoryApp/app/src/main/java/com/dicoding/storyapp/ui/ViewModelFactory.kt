@@ -8,6 +8,7 @@ import com.dicoding.storyapp.di.Injection
 import com.dicoding.storyapp.ui.add.AddViewModel
 import com.dicoding.storyapp.ui.login.LoginViewModel
 import com.dicoding.storyapp.ui.main.MainViewModel
+import com.dicoding.storyapp.ui.maps.MapsViewModel
 import com.dicoding.storyapp.ui.signup.SignUpViewModel
 
 class ViewModelFactory(private val repository: UserRepository) :
@@ -32,6 +33,10 @@ class ViewModelFactory(private val repository: UserRepository) :
                 AddViewModel(repository) as T
             }
 
+            modelClass.isAssignableFrom(MapsViewModel::class.java) -> {
+                MapsViewModel(repository) as T
+            }
+
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }
     }
@@ -42,8 +47,8 @@ class ViewModelFactory(private val repository: UserRepository) :
         private var INSTANCE: ViewModelFactory? = null
 
         @JvmStatic
-        fun getInstance(context: Context): ViewModelFactory {
-            if (INSTANCE == null) {
+        fun getInstance(context: Context, refresh: Boolean): ViewModelFactory {
+            if (INSTANCE == null || refresh) {
                 synchronized(ViewModelFactory::class.java) {
                     INSTANCE = ViewModelFactory(Injection.provideRepository(context))
                 }

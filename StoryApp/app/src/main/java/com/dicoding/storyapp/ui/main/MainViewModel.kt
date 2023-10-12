@@ -5,6 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
+import androidx.paging.PagingData
+import androidx.paging.cachedIn
 import com.dicoding.storyapp.api.response.ListStoryItem
 import com.dicoding.storyapp.data.Result
 import com.dicoding.storyapp.data.UserRepository
@@ -17,6 +19,9 @@ class MainViewModel(private val repository: UserRepository) : ViewModel() {
     fun getAllStories(): LiveData<Result<List<ListStoryItem>>> {
         return repository.getStories()
     }
+
+    val stories: LiveData<PagingData<ListStoryItem>> =
+        repository.getAllStories().cachedIn(viewModelScope)
 
     fun getSession(): LiveData<UserModel> {
         return repository.getSession().asLiveData()

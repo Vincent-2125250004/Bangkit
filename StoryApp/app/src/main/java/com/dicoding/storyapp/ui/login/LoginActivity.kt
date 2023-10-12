@@ -8,18 +8,19 @@ import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import com.dicoding.storyapp.data.Result
 import com.dicoding.storyapp.data.pref.UserModel
 import com.dicoding.storyapp.databinding.ActivityLoginBinding
 import com.dicoding.storyapp.ui.ViewModelFactory
 import com.dicoding.storyapp.ui.main.MainActivity
+import kotlinx.coroutines.launch
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
     private val viewModel by viewModels<LoginViewModel> {
-        ViewModelFactory.getInstance(this)
+        ViewModelFactory.getInstance(this, true)
     }
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,6 +29,8 @@ class LoginActivity : AppCompatActivity() {
 
         setupAction()
         playAnimation()
+
+
     }
 
     private fun setupAction() {
@@ -41,8 +44,12 @@ class LoginActivity : AppCompatActivity() {
                     when (result) {
                         is Result.Success -> {
                             showLoading(false)
-                            val token = result.data.loginResult?.token.toString()
-                            viewModel.saveSession(UserModel(email, token))
+                            val token = result.data.loginResult?.token
+                            if (token != null) {
+                                lifecycleScope.launch {
+                                    viewModel.saveSessions(UserModel(email, token))
+                                }
+                            }
                             AlertDialog.Builder(this).apply {
                                 setTitle("You're set !")
                                 setMessage("Anda berhasil Login, Selamat bersenang-senang")
@@ -56,8 +63,6 @@ class LoginActivity : AppCompatActivity() {
                                 create()
                                 show()
                             }
-
-
                         }
 
                         is Result.Error -> {
@@ -85,11 +90,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun showLoading(isLoading: Boolean) {
-        if (isLoading) {
-            binding.progressBar.visibility = View.VISIBLE
-        } else {
-            binding.progressBar.visibility = View.GONE
-        }
+        binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 
     private fun playAnimation() {

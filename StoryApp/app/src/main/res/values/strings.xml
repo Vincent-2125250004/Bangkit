@@ -23,4 +23,7 @@
     <string name="description">Description</string>
     <string name="add_stories">Tambah Story</string>
     <string name="image_upload">Image Upload</string>
+    <string name="title_activity_maps">MapsActivity</string>
+    <string name="maps">Maps</string>
+    <string name="retry">Retry</string>
 </resources>

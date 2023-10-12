@@ -2,6 +2,10 @@ package com.dicoding.storyapp.data
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
+import androidx.paging.liveData
 import com.dicoding.storyapp.api.response.AllStoriesResponse
 import com.dicoding.storyapp.api.response.ListStoryItem
 import com.dicoding.storyapp.api.response.LoginResponse
@@ -19,9 +23,10 @@ import okhttp3.RequestBody.Companion.toRequestBody
 import retrofit2.HttpException
 import java.io.File
 
-class UserRepository private constructor(
-    private val userPreferences: UserPreferences,
-    private val apiService: ApiService
+class UserRepository constructor(
+    //Not Private cuz used in Injection
+    val userPreferences: UserPreferences,
+    val apiService: ApiService
 ) {
     //dataStore's Methods
     suspend fun saveSession(user: UserModel) {
@@ -76,6 +81,30 @@ class UserRepository private constructor(
         }
     }
 
+    fun getAllStories(): LiveData<PagingData<ListStoryItem>> {
+        return Pager(
+            config = PagingConfig(
+                pageSize = 5
+            ),
+            pagingSourceFactory = {
+                StoriesPagingSource(apiService)
+            }
+        ).liveData
+    }
+
+    fun storyLocation(): LiveData<Result<List<ListStoryItem>>> = liveData {
+        emit(Result.Loading)
+        try {
+            val response = apiService.getStoriesWithLocation()
+            emit(Result.Success(response.listStory))
+        } catch (e: HttpException) {
+            val jsonInString = e.response()?.errorBody()?.string()
+            val errorBody = Gson().fromJson(jsonInString, AllStoriesResponse::class.java)
+            val errorMessage = errorBody.message.toString()
+            emit(Result.Error(errorMessage))
+        }
+    }
+
 
     fun uploadStory(imageFile: File, description: String): LiveData<Result<UploadResponse>> =
         liveData {
@@ -107,14 +136,4 @@ class UserRepository private constructor(
     }
 
 
-    companion object {
-        private var instance: UserRepository? = null
-        fun getInstance(
-            userPreferences: UserPreferences,
-            apiService: ApiService
-        ): UserRepository =
-            instance ?: synchronized(this) {
-                instance ?: UserRepository(userPreferences, apiService)
-            }.also { instance = it }
-    }
 }

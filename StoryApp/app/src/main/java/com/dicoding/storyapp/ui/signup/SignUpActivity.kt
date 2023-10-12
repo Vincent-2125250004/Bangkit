@@ -16,7 +16,7 @@ import com.dicoding.storyapp.ui.ViewModelFactory
 class SignUpActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySignUpBinding
     private val viewModel by viewModels<SignUpViewModel> {
-        ViewModelFactory.getInstance(this)
+        ViewModelFactory.getInstance(this, true)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -134,11 +134,7 @@ class SignUpActivity : AppCompatActivity() {
     }
 
     private fun showLoading(isLoading: Boolean) {
-        if (isLoading) {
-            binding.progressBar.visibility = View.VISIBLE
-        } else {
-            binding.progressBar.visibility = View.GONE
-        }
+        binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 
 

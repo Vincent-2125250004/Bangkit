@@ -24,7 +24,7 @@ class AddActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityAddBinding
     private val viewModel by viewModels<AddViewModel> {
-        ViewModelFactory.getInstance(this)
+        ViewModelFactory.getInstance(this, true)
     }
 
     private var currentImageUri: Uri? = null
@@ -98,7 +98,6 @@ class AddActivity : AppCompatActivity() {
             Log.d("Image File", "uploadImage: ${imageFile.path}")
             val description = binding.edAddDescription.text.toString()
             showLoading(true)
-
             viewModel.uploadImage(imageFile, description).observe(this) { result ->
                 when (result) {
                     is Result.Success -> {
