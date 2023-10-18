@@ -3,6 +3,6 @@ Progress Bangkit
 
 
 Learning Progress dari
-Kotlin -> Belajar Membuat Aplikasi Android -> Fundamental Android -> Intermediate
+Kotlin -> Belajar Membuat Aplikasi Android -> Fundamental Android -> Intermediate -> Compose
 
-Intermediate On Going
+ComposeOn Going
