@@ -3,6 +3,6 @@ Progress Bangkit
 
 
 Learning Progress dari
-Kotlin -> Belajar Membuat Aplikasi Android -> Fundamental Android -> Intermediate -> Compose
+Kotlin -> Belajar Membuat Aplikasi Android -> Fundamental Android -> Intermediate -> Compose -> ADD
 
-donee, soon able AAD
+All Done, CAPSTONE Processing...
