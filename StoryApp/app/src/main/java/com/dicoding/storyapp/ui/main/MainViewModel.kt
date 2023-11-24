@@ -16,6 +16,8 @@ import kotlinx.coroutines.launch
 class MainViewModel(private val repository: UserRepository) : ViewModel() {
     private val _refreshStatus = MutableLiveData<Boolean>()
     val refreshStatus: LiveData<Boolean> get() = _refreshStatus
+
+
     fun getAllStories(): LiveData<Result<List<ListStoryItem>>> {
         return repository.getStories()
     }

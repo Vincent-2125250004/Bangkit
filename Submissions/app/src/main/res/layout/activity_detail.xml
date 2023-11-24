@@ -27,13 +27,12 @@
                 android:id="@+id/iv_splashArt"
                 android:layout_width="400dp"
                 android:layout_height="400dp"
+                android:layout_gravity="center_horizontal"
                 android:layout_marginTop="20dp"
                 android:src="@drawable/ic_launcher_background"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_gravity="center_horizontal"
-                />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"

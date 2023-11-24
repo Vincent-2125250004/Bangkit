@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">PomPomWikie</string>
+    <string name="placeholder_search">Mencari Character apa ?</string>
+    <string name="contentIcon">Icon Characters</string>
+    <string name="scroll_to_top">Scroll to Top</string>
+    <string name="addItem">Add Characters</string>
+    <string name="splashArt">Characters Splash Art</string>
+    <string name="moveBack">Back</string>
+    <string name="dummy_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</string>
+    <string name="menu_home">Home</string>
+    <string name="menu_fav">Favorite</string>
+    <string name="menu_profile">Profile</string>
+    <string name="add_favorite">Add Favorite</string>
+    <string name="name">Vincent</string>
+    <string name="email">vincentpin66@gmail.com</string>
+    <string name="menu_add">Add</string>
+    <string name="empty">empty list\n</string>
+</resources>
