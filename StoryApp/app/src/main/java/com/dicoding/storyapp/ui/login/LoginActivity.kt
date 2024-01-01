@@ -30,7 +30,6 @@ class LoginActivity : AppCompatActivity() {
         setupAction()
         playAnimation()
 
-
     }
 
     private fun setupAction() {

@@ -96,6 +96,7 @@ class SignUpActivity : AppCompatActivity() {
                             showLoading(true)
                         }
 
+                        else -> {}
                     }
                 }
             }

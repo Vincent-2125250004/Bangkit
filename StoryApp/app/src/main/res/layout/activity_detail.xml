@@ -12,7 +12,6 @@
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:contentDescription="@string/image_story"
-
         android:src="@drawable/image_welcome"
         android:transitionName="item_detail_photo"
         app:layout_constraintEnd_toEndOf="parent"
